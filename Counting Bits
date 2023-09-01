@@ -1,0 +1,22 @@
+  vector<int> countBits(int n) 
+    {
+        vector<int>dp(n+1,0);
+        if(n==0) return {0};
+        dp[0]=0;
+        dp[1]=1;
+        int prev;
+        for(int i=2;i<=n;i++)
+        {
+            
+            if((i&(i-1))==0)  // if it is a power of 2 number the that number as 1 set bits
+            {
+                dp[i]=1;
+                prev=i; // store the previous power of 2 number in a variable
+            }
+            else
+            {
+                dp[i]=dp[prev]+dp[i-prev]; // if it is not a 2 power element the we should add the set bits of the previous power of 2 element and the remaining value
+            }
+        }
+        return dp;
+    }
