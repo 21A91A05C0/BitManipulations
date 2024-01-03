@@ -1,0 +1,15 @@
+int singleNumber(vector<int>& nums) 
+    {
+        int ans=0;
+        for(int i=0;i<32;i++)
+        {
+            int onescount=0;
+            for(int j=0;j<nums.size();j++)
+            {
+//checking the number is 1 or not
+                if(nums[j]&(1<<i)) onescount++;
+            }
+            if(onescount%3!=0) ans=ans|(1<<i);
+        }
+        return ans;
+    }
