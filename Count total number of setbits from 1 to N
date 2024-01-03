@@ -1,0 +1,31 @@
+You are given a number N. Find the total count of set bits for all numbers from 1 to N(both inclusive).
+Example 1:
+Input: N = 4
+Output: 5
+Explanation:
+For numbers from 1 to 4.
+For 1: 0 0 1 = 1 set bits
+For 2: 0 1 0 = 1 set bits
+For 3: 0 1 1 = 2 set bits
+For 4: 1 0 0 = 1 set bits
+Therefore, the total set bits is 5.
+// write upon 10 binaries and and find the mearest power to a particular number and now add that nearstest power and 2** nearest number and add the remaing 1's as next set of numbers contains 
+// all ones and then recursively call the numbers
+int findthenearestpower(int n)
+  {
+      int c=0;
+      while((1<<c)<=n)
+      {
+          c++;
+      }
+      return c-1;
+  }
+    int countSetBits(int N)
+    {
+        // Your logic here
+        if(N==0) return 0;
+        int np=findthenearestpower(N);
+            
+        int  ans=np*(1<<(np-1))+N-(1<<(np))+1+countSetBits(N-(1<<np));
+        return ans;
+    }
