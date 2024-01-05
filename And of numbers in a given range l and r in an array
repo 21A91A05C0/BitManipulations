@@ -1,0 +1,76 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+    int n;
+    cin>>n;
+    vector<int>arr;
+    for(int i=0;i<n;i++)
+    {
+        int c;
+        cin>>c;
+        arr.push_back(c);
+    }
+    
+        vector<vector<int>>bin(n,vector<int>(32,0));
+        for(int i=0;i<n;i++)
+        {
+            for(int j=31;j>=0;j--)
+            {
+                if(arr[i]&(1<<j)) bin[i][j]=1;
+                else bin[i][j]=0;
+            }
+        }
+        cout<<"binary array"<<endl;
+        for(int i=0;i<n;i++)
+        {
+            for(int j=31;j>=0;j--)
+            {
+                cout<<bin[i][j]<<" ";
+            }
+            cout<<endl;
+        }
+        vector<vector<int>>presum(n,vector<int>(32,0));
+        for(int i=0;i<n;i++)
+        {
+            for(int j=31;j>=0;j--)
+            {
+                if(i==0) presum[i][j]=bin[i][j];
+                else
+                {
+                    presum[i][j]=bin[i][j]+presum[i-1][j];
+                }
+            }
+        }
+        cout<<"prefixsum array"<<endl;
+        for(int i=0;i<n;i++)
+        {
+            for(int j=31;j>=0;j--)
+            {
+                cout<<presum[i][j]<<" ";
+            }
+            cout<<endl;
+        }
+    int q;
+    cin>>q;
+    while(q--)
+    {
+        int l,r;
+        cin>>l>>r;
+        int reans=0;
+        if(l!=0)  reans=r-l+1;
+        else reans=r+1;
+        int ans=0;
+        for(int j=31;j>=0;j--)
+        {
+            if(presum[r][j]>=reans)
+            {
+                ans=ans|(1<<j);
+            }
+        }
+        cout<<"ans"<<endl;
+        cout<<ans<<endl;
+    }
+    
+        
+}
