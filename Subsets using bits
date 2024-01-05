@@ -1,0 +1,19 @@
+vector<vector<int>> subsets(vector<int>& nums) 
+    {
+        vector<vector<int>>ans;
+        int n=nums.size();
+//the total number of subsets that can be obtained are
+        int totalsubsets=1<<n;
+        for(int i=0;i<totalsubsets;i++)
+        {
+            vector<int>arr;
+            //we will check the setbits upto max 32 bits
+            for(int j=0;j<32;j++)
+            {
+            if we find the setbit then we can say that we should add that number to ans
+                if(i&(1<<j)) arr.push_back(nums[j]);
+            }
+            ans.push_back(arr);
+        }
+        return ans;
+    }
