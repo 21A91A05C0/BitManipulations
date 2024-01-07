@@ -1,0 +1,6 @@
+n=int(input())
+s=bin(n)[2:]
+while(len(s)<32):
+    s='0'+s
+s=s[::-1]
+print(int(s,2))
